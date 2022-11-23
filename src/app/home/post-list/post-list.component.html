@@ -1,0 +1,96 @@
+<!-- <h1 *ngIf="totalProducts > 0">Total Products: {{ totalProducts }}</h1>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion multi="true" *ngIf="posts.length > 0 && !isLoading">
+  <mat-expansion-panel *ngFor="let post of posts">
+    <mat-expansion-panel-header>
+      {{ post.title }}
+    </mat-expansion-panel-header>
+    <div class="post-image">
+      <img [src]="post.imagePath" [alt]="post.title" />
+    </div>
+    <p>{{ post.content }}</p>
+    <p>price is :{{ post.price }}</p>
+    <mat-action-row *ngIf="userIsAuthenticated  ">
+      <a mat-button color="primary" [routerLink]="['/edit', post.id]">EDIT</a>
+      <button mat-button color="warn" (click)="onDelete(post.id)">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<mat-paginator [length]="totalProducts" [pageSize]="productsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+  *ngIf="posts.length > 0"></mat-paginator>
+<p class="info-text mat-body-1" *ngIf="posts.length <= 0 && !isLoading">No posts added yet!</p>
+ -->
+ <div class="container-fluid pt-5" *ngIf="userIsAuthenticated">
+  <div class="row">
+    <form class=" col-lg-4 col-md-3 col-sm-12 pt-2">
+      <div class=" form-control border border-3 pt-3 pb-3">
+        <div class="text-center">
+          <label for="" class="fs-4 m-2">Tea</label>
+          <input type="number" class="d-inline w-25 form-control"
+            value="0"
+            min="0" />
+          <label for="" class="fs-4 m-2">EGP 25 X</label>
+        </div>
+
+        <div class="text-center">
+          <label for="" class="fs-4 m-1">Cola</label>
+          <input type="number" class="d-inline w-25 form-control" value="0"
+            min="0" />
+          <label for="" class="fs-4 m-2">EGP 30 X</label>
+        </div>
+
+        <div class="pt-5">
+          <label for="note" class="fs-4">Note:</label>
+          <textarea class="form-control" cols="30" rows="3" id="note"></textarea>
+        </div>
+
+        <div class="pt-5">
+          <label for="" class="fs-4 m-2">Room</label>
+          <select name="combo-box" id="combo-box" class="d-inline w-50
+            form-select dropdown">
+            <option value="">select Room </option>
+            <option value="">room 23</option>
+            <option value="">room 24</option>
+            <option value="">room 25</option>
+          </select>
+        </div>
+
+        <hr>
+
+        <div class="">
+          <p class="text-end fs-4 m-2">EGP 55</p>
+          <div class="d-flex justify-content-end pt-4">
+            <button class="w-50 form-control text-center fs-4 fw-bold
+              border border-2 border-dark" href="#">Confirm</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+
+
+    <div class="col-lg-8 col-md-9 col-sm-12 ">
+      <div class="row">
+        <h1 *ngIf="totalProducts > 0">Latest Order</h1>
+        <div class="col-3 text-center pb-4" *ngFor="let product of posts; let i=index">
+          <div *ngIf="i<1">
+          <a href="#"><img [src]="product.imagePath" [alt]="product.title" height="150" width="150" class="rounded-circle"></a>
+          <label for="" class="d-block fs-5 pt-3">{{product.title}}</label>
+        </div>
+        </div>
+
+
+
+        <hr class="hr-brown d-block">
+
+
+
+        <div *ngFor="let post of posts" class="col-3 text-center pt-5
+          d-inline">
+          <a href="#"><img [src]="post.imagePath" [alt]="post.title" height="150" width="150" class="rounded-circle"></a>
+          <label for="" class="d-block fs-5 pt-3">{{post.title}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

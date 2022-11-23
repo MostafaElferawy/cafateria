@@ -1,0 +1,61 @@
+<a class="btn btn-success text-white fw-bold float-end" routerLink="create"
+  >Add product</a>
+
+<h3 *ngIf="totalProducts > 0" class="mt-5 mb-4">User Products</h3>
+<h3 *ngIf="totalProducts > 0" class="mt-5 mb-4">{{ firstName }}</h3>
+
+
+<div class="container">
+  <div class="row">
+    <table
+      class="table table-striped table-min pt-5 size text-center"
+      *ngIf="totalProducts > 0"
+    >
+      <thead class="text-white fs-5 fw-bold" style="background-color: #7a86ca">
+        <td class="p-3">Name</td>
+        <td class="p-3">Description</td>
+
+        <td class="p-3">Image</td>
+        <td class="p-3">Price</td>
+        <td class="p-3">Case</td>
+        <td class="p-3">Action</td>
+      </thead>
+      <tbody class="align-middle fs-5">
+        <tr *ngFor="let post of posts">
+          <td>{{ post.title }}</td>
+          <td>{{ post.content }}</td>
+          <td>
+            <img
+              [src]="post.imagePath"
+              [alt]="post.title"
+              height="50px"
+              width="50px"
+            />
+          </td>
+          <td>{{ post.price }}</td>
+          <td>Avialable</td>
+          <td>
+            <mat-action-row *ngIf="userIsAuthenticated">
+              <a class="btn btn-primary me-1" [routerLink]="['/edit', post.id]"
+                >Edit</a>
+              <button class="btn btn-danger float-end" (click)="onDelete(post.id)">
+                Delete
+              </button>
+            </mat-action-row>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<mat-paginator
+  [length]="totalProducts"
+  [pageSize]="productsPerPage"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="onChangedPage($event)"
+  *ngIf="posts.length > 0"
+></mat-paginator>
+<p class="info-text mat-body-1" *ngIf="posts.length <= 0 && !isLoading">
+  No posts added yet!
+</p>
